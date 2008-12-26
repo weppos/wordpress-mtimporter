@@ -335,33 +335,33 @@ EOS;
     // The following functions has been extracted from official wordpress files.
     // I haven't changed any function name even if the functions shuld be considered protected.
     
-	function has_gzip() {
-		return is_callable('gzopen');
-	}
+    function has_gzip() {
+        return is_callable('gzopen');
+    }
 
-	function fopen($filename, $mode='r') {
-		if ( $this->has_gzip() )
-			return gzopen($filename, $mode);
-		return fopen($filename, $mode);
-	}
+    function fopen($filename, $mode='r') {
+        if ( $this->has_gzip() )
+            return gzopen($filename, $mode);
+        return fopen($filename, $mode);
+    }
 
-	function feof($fp) {
-		if ( $this->has_gzip() )
-			return gzeof($fp);
-		return feof($fp);
-	}
+    function feof($fp) {
+        if ( $this->has_gzip() )
+            return gzeof($fp);
+        return feof($fp);
+    }
 
-	function fgets($fp, $len=8192) {
-		if ( $this->has_gzip() )
-			return gzgets($fp, $len);
-		return fgets($fp, $len);
-	}
+    function fgets($fp, $len=8192) {
+        if ( $this->has_gzip() )
+            return gzgets($fp, $len);
+        return fgets($fp, $len);
+    }
 
-	function fclose($fp) {
-		if ( $this->has_gzip() )
-			return gzclose($fp);
-		return fclose($fp);
-	}
+    function fclose($fp) {
+        if ( $this->has_gzip() )
+            return gzclose($fp);
+        return fclose($fp);
+    }
     
 }
 
