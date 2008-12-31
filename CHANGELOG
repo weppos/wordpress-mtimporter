@@ -1,5 +1,9 @@
 = Changelog
 
+== is_wp_error
+
+* ADDED: In case of error the WP_Error() message is displayed to the user.
+
 == Release 0.1.0
 
 * Initial version

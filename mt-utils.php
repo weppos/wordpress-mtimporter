@@ -35,20 +35,25 @@ class MT_Utils
                 break;
             case 11;
                 check_admin_referer('import-upload');
-                $this->doImportTags();
+                $response = $this->doImportTags();
                 break;
             case 20:
-                $this->greetHtaccess();
+                $response = $this->greetHtaccess();
                 break;
             case 21;
                 check_admin_referer('import-upload');
-                $this->doConfigureHtaccess();
+                $response = $this->doConfigureHtaccess();
                 break;
             case 22;
                 check_admin_referer('mt-configure-htaccess');
-                $this->doGenerateHtaccess();
+                $response = $this->doGenerateHtaccess();
                 break;
         }
+        
+        if (is_wp_error($response)) {
+          echo '<p><strong>** Error ** ' .  htmlspecialchars($response->get_error_message()) . '</strong></p>';
+        }
+        
         $this->_footer();
     }
 
@@ -193,6 +198,7 @@ class MT_Utils
         foreach($posts as $post) {
             if ($postId = post_exists($post->title, $post->content, '')) {
                 $postInstance = get_post($postId, OBJECT);
+                //echo "<pre>" . var_dump($postInstance) . '</pre>';
                 $result = $this->_replacePlaceholdersInHtaccess($templateEntry, array('wp-id' => $postInstance->ID, 'wp-postname' => $postInstance->post_name, 'mt-basename' => $post->basename));
             } else {
                 $result = sprintf(__('# ** Warning ** Post %s not found.'), $post->title);
