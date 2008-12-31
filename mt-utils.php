@@ -162,11 +162,15 @@ class MT_Utils
 <p><?php _e('This is the line template for an entry item.') ?><br />
 <?php _e('Available placeholders:') ?></p>
 <ol>
-<li><code>%{wp-id}</code>: <? _e('The WordPress post ID.') ?></li>
-<li><code>%{wp-postname}</code>: <? _e('The WordPress post name.') ?></li>
-<li><code>%{mt-basename}</code>: <? _e('The Movable Type original basename.') ?></li>
+<li><code>%{wp-id}</code>:            <? _e('The WordPress post ID.') ?></li>
+<li><code>%{wp-postname}</code>:      <? _e('The WordPress post name.') ?></li>
+<li><code>%{wp-postdate}</code>:      <? _e('The WordPress post date (ex. 2008-10-12).') ?></li>
+<li><code>%{wp-postdate-yyyy}</code>: <? _e('The WordPress post year (ex. 2008).') ?></li>
+<li><code>%{wp-postdate-mm}</code>:   <? _e('The WordPress post month, including leading 0 (ex 10).') ?></li>
+<li><code>%{wp-postdate-dd}</code>:   <? _e('The WordPress post day, including leading 0 (ex 12).') ?></li>
+<li><code>%{mt-basename}</code>:      <? _e('The Movable Type original basename.') ?></li>
 </ol>
-<textarea id="template_entry" name="template_entry" class="template">Redirect 301 /blog/([0-9]){4}/([0-9]){2}/%{mt-basename} <?php echo get_option('siteurl') ?>/$1/$2/%{wp-postname}</textarea>
+<textarea id="template_entry" name="template_entry" class="template">Redirect 301 /blog/%{wp-postdate-yyyy}/%{wp-postdate-mm}/%{mt-basename} <?php echo get_option('siteurl') ?>/%{wp-postdate-yyyy}/%{wp-postdate-mm}/%{wp-postname}</textarea>
 <h3><label for="template_htaccess"><?php _e('Template Htaccess') ?></label></h3>
 <p><?php _e('This is the global template for the htaccess.') ?><br />
 <?php _e('Available placeholders:') ?></p>
@@ -198,8 +202,11 @@ class MT_Utils
         foreach($posts as $post) {
             if ($postId = post_exists($post->title, $post->content, '')) {
                 $postInstance = get_post($postId, OBJECT);
-                //echo "<pre>" . var_dump($postInstance) . '</pre>';
-                $result = $this->_replacePlaceholdersInHtaccess($templateEntry, array('wp-id' => $postInstance->ID, 'wp-postname' => $postInstance->post_name, 'mt-basename' => $post->basename));
+                $postDate = strtotime($postInstance->post_date);
+                $result = $this->_replacePlaceholdersInHtaccess($templateEntry, array(
+                  'wp-id' => $postInstance->ID, 'wp-postname' => $postInstance->post_name,
+                  'wp-postdate' => date('Y-m-d', $postDate), 'wp-postdate-yyyy' => date('Y', $postDate), 'wp-postdate-mm' => date('m', $postDate), 'wp-postdate-dd' => date('d', $postDate),
+                  'mt-basename' => $post->basename));
             } else {
                 $result = sprintf(__('# ** Warning ** Post %s not found.'), $post->title);
             }

@@ -3,6 +3,7 @@
 == is_wp_error
 
 * ADDED: In case of error the WP_Error() message is displayed to the user.
+* ADDED: Additional placeholders to inject the post date in a .htacces rewrite rule.
 
 == Release 0.1.0
 
