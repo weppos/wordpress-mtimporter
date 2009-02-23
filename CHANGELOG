@@ -1,6 +1,6 @@
 = Changelog
 
-== master
+== Release 0.2.0
 
 * ADDED: In case of error the WP_Error() message is displayed to the user.
 * ADDED: Additional placeholders to inject the post date in a .htaccess rewrite rule.
