@@ -1,2 +1,34 @@
-*WARNING*: This library has not been released yet. This package seems stable, but should be considered a development release. 
-Changes to specifications may occur at any time and without notice. For the full list of changes look at the CHANGELOG file.
+= Movable Type Importer Utilities
+
+Movable Type Importer Utilities is a small collection of utilities to finalize your migration from Movable Type to Wordpress.
+It is not a replacement for the official Movable Type and TypePad importer but provides additional tools not available in the original library shipped with WordPress 2.7.
+
+.htaccess generator creates an Apache .htaccess configuration file to redirect all your MovableType entries to the corresponding WordPress posts.
+
+The tag importer solves the problem of importing in WordPress all your Movable Type tags. According to the resources linked from the official WordPress documentation at http://codex.wordpress.org/Importing_from_Movable_Type_to_WordPress, this is one of the most painful downside. Thanks to the tag importer, this is no longer a pain in the ass!
+
+To learn more visit http://www.simonecarletti.com/blog/2009/02/movable-type-to-wordpress-importer-utilities/.
+
+
+== Installation
+
+This library is not designed to be used as a plugin thus you can't install it with the excellent plugin manager available since WordPress 2.7. Movable Type Importer Utilities is an importer and it's designed to follow the same interface of the other importers shipped with a default WordPress installation.
+
+To install this library copy the file to the WordPress <code>wp-admin/import</code> folder. Now log as administrator and open the Tools > Importer page. A new link called "Movable Type Importer Utilities" should now be available.
+
+If you can't see the link make sure the file has been copied to the right WordPress importer folder.
+
+Note. This library is not compatible with WordPress < 2.7.
+
+
+== Usage
+
+This importer is fully documented. First choose the tool you want to use, then follow the instructions step by step.
+
+Don't be stupid - backup your database before proceeding!
+
+
+== License
+
+Copyright © 2008-2009 Simone Carletti, Movable Type Importer Utilities is released under under the same licence as WordPress.
+See http://codex.wordpress.org/License for more information about WordPress and the GNU General Public License.
